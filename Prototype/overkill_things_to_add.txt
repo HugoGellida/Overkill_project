@@ -1,0 +1,20 @@
+function give_card_to_master | Player
+
+
+GAME MASTER
+
+give_card_to_player, player      give a card to the specified player
+give_asset_to_player, player     give an asset to the specified player  
+reset_deck, player, color               reset the specified color deck of the specified player
+start_round                             start a new round
+is_round_over                           yes or no that round is over
+is_game_over                            yes or no that game is over
+start_game                              start a new game
+
+game_master_id          int
+draw_list               list
+bet                     int
+players                 list
+objective               int
+timer                   int
+unused_asset_list       list
