@@ -37,8 +37,8 @@ export default function Lobby() {
         },
         "test": {
             rotation_end: Math.floor((Math.random() - 0.5) * 180),
-            left_end: 13,
-            top_position: 50
+            left_end: 32,
+            top_position: -20
         }
     });
 
@@ -131,7 +131,10 @@ export default function Lobby() {
                         }}/><div id="statistics" title="Check statistics" onMouseOver={() => { set_item_behind_mouse("statistics") }} onMouseLeave={() => { set_item_behind_mouse(null) }} style={{
                             ...set_attribute_card("statistics"),
                             backgroundImage: "url('./Statistics.png')"
-                        }}/></Table>
+                        }}/><div id="test" title="Activate test" onMouseOver={() => { set_item_behind_mouse("test") }} onMouseLeave={() => { set_item_behind_mouse(null) }} style={{
+                            ...set_attribute_card("test"),
+                            backgroundImage: "url('./Test.png')"
+                        }} onClick={show}/></Table>
                     </div>
                 </>
             )}
