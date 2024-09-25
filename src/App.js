@@ -2,13 +2,16 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Log_in from './javascript/log_in';
 import { useEffect } from 'react';
+import Lobby from './javascript/lobby';
 
 
 function App() {
   return (
-    <div className="App" style={{height: "100%", width:"100%"}}>
+    <div className="App" style={{height: "100%", width:"100%", overflow: "hidden"}}>
       <Routes>
         <Route path='/' element={<Log_in/>}/>
+        <Route path='/Lobby' element={<Lobby/>}/>
+        <Route path='/Parameters'/>
       </Routes>
     </div>
   );

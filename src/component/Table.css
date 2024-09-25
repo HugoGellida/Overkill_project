@@ -1,0 +1,34 @@
+#table {
+    height: 110%;
+    width: 100%;
+    left: 0%;
+    transform: rotateX(45deg);
+    position: relative;
+    overflow: hidden;
+    border: 5px solid rgb(20, 20, 20);
+    border-radius: 5%;
+    background: radial-gradient(circle, rgb(20, 20, 20) 10%, rgb(10, 10, 10) 90%);
+    animation: light_flicker 10s linear infinite;
+}
+
+#table3deffect {
+    transform: translate(-50%, 0%) translateZ(-50px);
+    transform-style: preserve-3d;
+    left: 50%;
+    bottom: 0%;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    perspective: 250px;
+}
+
+@keyframes light_flicker {
+    0%, 20%, 20.5%, 21%, 21.5%, 50%, 50.5%, 51%, 60%, 60.5%, 100% {
+        background: radial-gradient(circle, rgb(15, 15, 15) 10%, rgb(5, 5, 5) 90%);
+    }
+
+    20.25%, 20.75%, 21.25%, 50.25%, 50.75%, 60.25% {
+        background: radial-gradient(circle, rgb(0, 0, 0) 10%, rgb(0, 0, 0) 90%);
+    }
+}
