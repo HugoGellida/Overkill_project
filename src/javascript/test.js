@@ -24,6 +24,7 @@ export default function Test(){
                 }
             }></div>
             <button onClick={() => {set_is_looking_up(!is_looking_up)}} style={{position: "relative", zIndex: '1'}}>Change looks</button>
+            <div id="heartbeat-container" style={{zIndex: '1'}}><div id="heartbeat-straight-line1"/><div id="heartbeat-up-line"/><div id="heartbeat-down-line"/><div id="heartbeat-upnormal-line"/><div id="heartbeat-straight-line2"/></div>
         </div>
     )
 }

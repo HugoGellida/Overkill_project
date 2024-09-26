@@ -3,3 +3,100 @@
     position: absolute;
     z-index: 0;
 }
+
+/* #heartbeat-container {
+    width: 10%;
+    height: 10%;
+    top: 10%;
+    left: 10%;
+    overflow: hidden;
+    position: absolute;
+    background-color: black;
+}
+
+#heartbeat-straight-line1 {
+    width: 150%;
+    height: 2px;
+    top: 50%;
+    left: 0%;
+    transform: translate(0%, -50%);
+    background-color: lime;
+    position: absolute;
+    z-index: 1;
+    animation: defile 1s linear infinite;
+}
+
+#heartbeat-up-line {
+    width: 25%;
+    left: 141%;
+    top: 29.5%;
+    height: 2px;
+    transform: rotate(-77.5deg);
+    background-color: lime;
+    position: absolute;
+    z-index: 1;
+    animation: defileup 1s linear infinite;
+}
+
+#heartbeat-down-line {
+    width: 50%;
+    left: 136.5%;
+    top: 48%;
+    height: 2px;
+    transform: rotate(77.5deg);
+    background-color: lime;
+    position: absolute;
+    z-index: 1;
+    animation: defiledown 1s linear infinite;
+}
+
+#heartbeat-upnormal-line {
+    width: 25%;
+    left: 157%;
+    top: 69%;
+    height: 2px;
+    transform: rotate(-77.5deg);
+    background-color: lime;
+    position: absolute;
+    z-index: 1;
+    animation: defileup 1s linear infinite;
+}
+
+#heartbeat-straight-line2 {
+    width: 150%;
+    left: 172%;
+    top: 50%;
+    height: 2px;
+    transform: translate(0%, -50%);
+    background-color: lime;
+    position: absolute;
+    z-index: 1;
+    animation: defile 1s linear infinite;
+}
+
+@keyframes defile {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-200px);
+    }
+}
+
+@keyframes defileup {
+    0% {
+        transform: translateX(0) rotate(-77.5deg);
+    }
+    100% {
+        transform: translateX(-200px) rotate(-77.5deg);
+    }
+}
+
+@keyframes defiledown {
+    0% {
+        transform: translateX(0) rotate(77.5deg);
+    }
+    100% {
+        transform: translateX(-200px) rotate(77.5deg);
+    }
+} */
