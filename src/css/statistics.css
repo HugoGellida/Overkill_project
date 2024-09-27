@@ -20,16 +20,22 @@
     background: linear-gradient(0deg, rgb(50, 50, 50), rgb(20, 20, 20));
     border: 2px solid black;
     position: absolute;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
 }
 
 .information_on_panel {
-    margin: 5%;
+    width: 50%;
+    height: 90%;
+    top: 50%;
+    left: 5%;
+    position: absolute;
+    transform: translateY(-50%);
     background-color: black;
-    color: white;
-    align-items: center;
+    color: rgb(0, 100, 0);
+    font-size: 75%;
     justify-content: center;
+    flex-direction: column;
     display: flex;
+    align-items: flex-start;
+    overflow-x: auto;
+    text-shadow: 0 0 10px rgb(0, 150, 0), 0 0 20px rgb(0, 100, 0);
 }

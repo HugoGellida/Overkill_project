@@ -10,8 +10,6 @@ function App() {
     <div className="App" style={{height: "100%", width:"100%", overflow: "hidden"}}>
       <Routes>
         <Route path='/' element={<Log_in/>}/>
-        <Route path='/Lobby' element={<Lobby/>}/>
-        <Route path='/Parameters'/>
       </Routes>
     </div>
   );

@@ -7,13 +7,8 @@ import Test from "./test";
 import Statistics from "./statictics";
 
 
-export default function Lobby() {
-    const navigate = React.useNavigate;
-    const [show_join_game, set_show_join_game] = React.useState(false);
-    const [show_statistics, setShow_statistics] = React.useState(false);
-    const [show_parameters, setShow_parameters] = React.useState(false);
-    const [show_create_game, setShow_create_game] = React.useState(false);
-    const [test, setTest] = React.useState(false);
+export default function Lobby({TSC}) {
+    const [show, set_show] = React.useState(false);
     const [item_behind_mouse, set_item_behind_mouse] = React.useState(null);
     const [cards, set_cards] = React.useState({
         "create_game": {
@@ -43,28 +38,11 @@ export default function Lobby() {
         }
     });
 
-    const show = (event) => {
-        switch (event.target.id) {
-            case "game_list":
-                set_show_join_game(true);
-                break;
-            case "create_game":
-                setShow_create_game(true);
-                break;
-
-            case "statistics":
-                setShow_statistics(true);
-                break;
-            case "parameters":
-                setShow_parameters(true);
-                break;
-            default:
-                setTest(true);
-                break;
-        }
+    const change_show = (event) => {
+        set_show(event.target.id);
+        set_item_behind_mouse(null);
     }
     const set_attribute_card = (id) => {
-        console.log(cards[id]);
         const random_rotation = cards[id].rotation_end;
         const left_end = cards[id].left_end;
         const top_position = cards[id].top_position;
@@ -103,7 +81,6 @@ export default function Lobby() {
         const style = document.createElement("style");
         document.head.appendChild(style);
         Object.keys(cards).forEach(name => {
-            console.dir(cards[name]);
             const generate_animation = simulate_throw_card(cards[name].rotation_end, cards[name].left_end);
             style.sheet.insertRule(generate_animation, style.sheet.cssRules.length);
         });
@@ -114,12 +91,12 @@ export default function Lobby() {
 
     return (
         <>
-            {!test && (
+            {show !== "test"  && (
                 <div id="background_lobby">
-                    {show_statistics && (
-                        <Statistics />
+                    {show === "statistics" && (
+                        <Statistics TSC={TSC} hide_stats={() => {set_show(null)}}/>
                     )}
-                    {!show_statistics && (
+                    {!show && (
                         <>
                             <div id="light" style={{ left: '20%' }} />
                             <div id="light" style={{ right: '20%', animation: 'secondary_flicker 10s alternate infinite' }} />
@@ -130,10 +107,10 @@ export default function Lobby() {
                             }} /><div id="join_game" title="Join a game" onMouseOver={() => { set_item_behind_mouse("join_game") }} onMouseLeave={() => { set_item_behind_mouse(null) }} style={{
                                 ...set_attribute_card("join_game"),
                                 backgroundImage: "url('./Join_game.png')"
-                            }} /><div id="parameters" title="Check parameters" onMouseOver={() => { set_item_behind_mouse("parameters") }} onMouseLeave={() => { set_item_behind_mouse(null) }} onClick={show} style={{
+                            }} /><div id="parameters" title="Check parameters" onMouseOver={() => { set_item_behind_mouse("parameters") }} onMouseLeave={() => { set_item_behind_mouse(null) }} onClick={change_show} style={{
                                 ...set_attribute_card("parameters"),
                                 backgroundImage: "url('./Parameters.png')"
-                            }} /><div id="statistics" title="Check statistics" onMouseOver={() => { set_item_behind_mouse("statistics") }} onMouseLeave={() => { set_item_behind_mouse(null) }} onClick={show} style={{
+                            }} /><div id="statistics" title="Check statistics" onMouseOver={() => { set_item_behind_mouse("statistics") }} onMouseLeave={() => { set_item_behind_mouse(null) }} onClick={change_show} style={{
                                 ...set_attribute_card("statistics"),
                                 backgroundImage: "url('./Statistics.png')"
                             }} /><div id="test" title="Activate test" onMouseOver={() => { set_item_behind_mouse("test") }} onMouseLeave={() => { set_item_behind_mouse(null) }} style={{
@@ -144,7 +121,7 @@ export default function Lobby() {
                     )}
                 </div>
             )}
-            {test && (<Test />)}
+            {show === 'test' && (<Test />)}
         </>
     )
 }
