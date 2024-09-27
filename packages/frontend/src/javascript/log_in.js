@@ -11,8 +11,16 @@ export default function Log_in() {
     const [show_lobby, set_show_lobby] = useState(false);
 
     useEffect(() => {
+        if (sessionStorage.getItem("TSC")){
+            set_show_lobby(true);
+        }
+
+
         const log_in_response = (response) => {
-            if (response) set_show_lobby(true);
+            if (response) {
+                set_show_lobby(true);
+                sessionStorage.setItem("TSC", TSC);
+            }
             else setShow_warning(true);
         }
         socket.on("log_in_response", log_in_response);
@@ -70,7 +78,10 @@ export default function Log_in() {
                     )}
                 </div>
             )}
-            {show_lobby && (<Lobby TSC={TSC}/>)}
+            {show_lobby && (<Lobby disconnect={() => {
+                sessionStorage.removeItem("TSC");
+                set_show_lobby(false);
+            }}/>)}
         </>
 
 

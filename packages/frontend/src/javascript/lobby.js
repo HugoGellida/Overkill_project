@@ -7,7 +7,7 @@ import Test from "./test";
 import Statistics from "./statictics";
 
 
-export default function Lobby({TSC}) {
+export default function Lobby({ disconnect }) {
     const [show, set_show] = React.useState(false);
     const [item_behind_mouse, set_item_behind_mouse] = React.useState(null);
     const [cards, set_cards] = React.useState({
@@ -91,13 +91,14 @@ export default function Lobby({TSC}) {
 
     return (
         <>
-            {show !== "test"  && (
+            {show !== "test" && (
                 <div id="background_lobby">
                     {show === "statistics" && (
-                        <Statistics TSC={TSC} hide_stats={() => {set_show(null)}}/>
+                        <Statistics hide_stats={() => { set_show(null) }} />
                     )}
                     {!show && (
                         <>
+                            <button onClick={disconnect} style={{ position: "absolute", zIndex: "1" }}>Disconnect</button>
                             <div id="light" style={{ left: '20%' }} />
                             <div id="light" style={{ right: '20%', animation: 'secondary_flicker 10s alternate infinite' }} />
                             <LightBulb />
@@ -116,7 +117,7 @@ export default function Lobby({TSC}) {
                             }} /><div id="test" title="Activate test" onMouseOver={() => { set_item_behind_mouse("test") }} onMouseLeave={() => { set_item_behind_mouse(null) }} style={{
                                 ...set_attribute_card("test"),
                                 backgroundImage: "url('./Test.png')"
-                            }} onClick={show} /></Table>
+                            }} onClick={change_show} /></Table>
                         </>
                     )}
                 </div>
