@@ -5,7 +5,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    
+    position: absolute;
 }
 
 #center_div {
@@ -29,4 +29,24 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+.fade-exit {
+    opacity: 1;
+}
+
+.fade-exit-active {
+    opacity: 0;
+    transition: opacity 2s, transform 2s;
+}
+
+.fade-appear {
+    opacity: 0;
+    transform: translateY(0);
+}
+
+.fade-appear-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 2s, transform 2s;
 }
