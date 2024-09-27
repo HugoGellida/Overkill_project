@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import LightBulb from "../component/Light-bulb";
-import "./../css/lobby.css";
+import "./lobby.css";
 import Table from "../component/Table";
 import Test from "./test";
 import Statistics from "./statictics";
@@ -104,19 +103,19 @@ export default function Lobby({ disconnect }) {
                             <LightBulb />
                             <Table><div id="create_game" title="Create a game" onMouseOver={() => { set_item_behind_mouse("create_game") }} onMouseLeave={() => { set_item_behind_mouse(null) }} style={{
                                 ...set_attribute_card("create_game"),
-                                backgroundImage: "url('./Create_game.png'"
+                                backgroundImage: "url('./images/Create_game.png'"
                             }} /><div id="join_game" title="Join a game" onMouseOver={() => { set_item_behind_mouse("join_game") }} onMouseLeave={() => { set_item_behind_mouse(null) }} style={{
                                 ...set_attribute_card("join_game"),
-                                backgroundImage: "url('./Join_game.png')"
+                                backgroundImage: "url('./images/Join_game.png')"
                             }} /><div id="parameters" title="Check parameters" onMouseOver={() => { set_item_behind_mouse("parameters") }} onMouseLeave={() => { set_item_behind_mouse(null) }} onClick={change_show} style={{
                                 ...set_attribute_card("parameters"),
-                                backgroundImage: "url('./Parameters.png')"
+                                backgroundImage: "url('./images/Parameters.png')"
                             }} /><div id="statistics" title="Check statistics" onMouseOver={() => { set_item_behind_mouse("statistics") }} onMouseLeave={() => { set_item_behind_mouse(null) }} onClick={change_show} style={{
                                 ...set_attribute_card("statistics"),
-                                backgroundImage: "url('./Statistics.png')"
+                                backgroundImage: "url('./images/Statistics.png')"
                             }} /><div id="test" title="Activate test" onMouseOver={() => { set_item_behind_mouse("test") }} onMouseLeave={() => { set_item_behind_mouse(null) }} style={{
                                 ...set_attribute_card("test"),
-                                backgroundImage: "url('./Test.png')"
+                                backgroundImage: "url('./images/Test.png')"
                             }} onClick={change_show} /></Table>
                         </>
                     )}

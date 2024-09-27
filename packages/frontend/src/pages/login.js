@@ -1,6 +1,6 @@
-import "./../css/Log_in.css";
+import "./login.css";
 import React, { useEffect, useState } from "react";
-import socket from "./../socket";
+import socket from "../socket";
 import Lobby from "./lobby";
 
 export default function Log_in() {
@@ -41,7 +41,7 @@ export default function Log_in() {
     return (
         <>
             {!show_lobby && (
-                <div id="Log_in" style={{ backgroundImage: "url('/Log_in_menu.png')" }}>
+                <div id="Log_in" style={{ backgroundImage: "url('/images/Log_in_menu.png')" }}>
                     {!show_warning && (
                         <>
                             {method === "log_in" && (

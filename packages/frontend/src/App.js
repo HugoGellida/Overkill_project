@@ -1,8 +1,6 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import Log_in from './javascript/log_in';
-import { useEffect } from 'react';
-import Lobby from './javascript/lobby';
+import Log_in from './pages/login';
 
 
 function App() {

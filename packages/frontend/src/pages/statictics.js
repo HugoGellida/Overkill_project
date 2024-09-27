@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/statistics.css";
+import "./statistics.css";
 import socket from "../socket";
 
 const Statistics = ({ hide_stats }) => {
