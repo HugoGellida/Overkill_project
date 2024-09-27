@@ -15,6 +15,7 @@ server.listen(3001, () => {
 });
 
 const db = new Database("./database.db");
+db.pragma('journal_mode = WAL');
 
 db.prepare("CREATE TABLE IF NOT EXISTS User(username VARCHAR(20), TSC VARCHAR(20) NOT NULL)").run();
 
