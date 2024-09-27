@@ -26,3 +26,5 @@ yarn-error.log*
 *pycache*
 
 *.db
+
+.vscode
