@@ -17,13 +17,11 @@ server.listen(3001, () => {
 
 const sqlite3 = require("sqlite3");
 const db = new sqlite3.Database("./Database.db", (err) => {
-    if (err) console.warn("Error occured while trying to open database");
-    else console.log("Database opened");
+    if (err) console.error(err);
 });
 
 db.run("CREATE TABLE IF NOT EXISTS User(username VARCHAR(20), TSC VARCHAR(20) NOT NULL)", (err) => {
-    if (err) console.warn("Error occured while creating table User");
-    else console.log("Successfully created table User or table User already exists");
+    if (err) console.error(err);
 });
 
 io.on("connection", socket => {
