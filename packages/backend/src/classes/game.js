@@ -1,6 +1,5 @@
 import assert from "assert";
-const card = require("./card");
-const player = require("./player");
+import card from "./card.js";
 
 class game {
     constructor(game_id, initial_score, timer){
@@ -17,7 +16,7 @@ class game {
         this.objective = 21;
     }
 
-    addPlayer(player){
+    add_player(player){
         assert(this.players.length != 2, "Cannot add another player because game is full");
         this.players.push(player);
     }
@@ -32,7 +31,7 @@ class game {
 
     generate_cards(){
         let cards = [];
-        for(v = 0; v <= 9; v++){
+        for(let v = 1; v <= 9; v++){
             ["black", "red"].forEach((c) => {
                 cards.push(new card(c, v));
             });
@@ -48,22 +47,30 @@ class game {
             next_card = color_draw[0];
             this.draw = this.draw.filter((card) => card != next_card);
         }
-        if (hidden) next_card.hidden = true;
-        else next_card.hidden = false;
+        if (hidden) next_card.is_hidden = true;
+        else next_card.is_hidden = false;
         player.cards[next_card.color].push(next_card);
     }
 
-    start_game(){
-        assert(players.length === 2);
-        while (!this.game_over){
-            this.start_round();
+    expurgate(player){
+        player.cards["red"].push(new card("red", 99));
+        player.cards["black"].push(new card("black", 99));
+    }
+
+    async start_game(){
+        assert(this.players.length === 2, "Cannot start the game with less than 2 players");
+        while (!this.game_over()){
+            console.log("round_begin");
+            await this.start_round();
+            console.log("round_end");
         }
     }
 
-    start_round() {
+    async start_round() {
         this.players.forEach((player) => {
-            player.forEach((color) => {
-                this.draw.push(...player.cards[color]);
+            Object.keys(player.cards).forEach((color) => {
+                this.draw.push(...player.cards[color].filter((card) => card.value != 99));
+                player.cards[color] = [];
             });
         });
 
@@ -73,19 +80,29 @@ class game {
             this.give_card_to(player, false, "red");
             this.give_card_to(player, true, "black");
             this.give_card_to(player, false, "black");
-            console.dir(player.cards);
+            player.stay = false;
         });
 
         let i = 0;
 
-        while (!this.round_over){
-            let current_player = player[i];
-            current_player.play();
-            i = (i + 1) % 2;
+        while (!this.round_over()){
+            let current_player = this.players[i];
+            try {
+                const ended_turn = await current_player.play();
+                if (ended_turn){
+                    i = (i + 1) % 2;
+                }
+            } catch {
+                this.expurgate(current_player);
+            }
         }
-        console.dir(this.round_winner());
-        this.round_winner().score += this.bet;
-        this.players.filter((player) => player != this.round_winner())[0].score -= this.bet;
+        if (this.round_winner()){
+            console.log(this.round_winner().username);
+            this.round_winner().score += this.bet;
+            this.players.filter((player) => player != this.round_winner())[0].score -= this.bet;
+            this.players.reverse();
+        }
+        else console.log("draw");
         this.bet ++;
     }
 
@@ -94,7 +111,7 @@ class game {
     }
 
     round_over(){
-        return this.players.filter((player) => player.stay).length == 2;
+        return this.players.filter((player) => player.stay).length == 2 || this.players.filter((player) => player.overkill_amount() == 2).length >= 1;
     }
 
     round_winner(){
@@ -109,4 +126,4 @@ class game {
     }
 }
 
-module.exports = game;
+export default game;

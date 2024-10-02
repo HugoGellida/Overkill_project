@@ -1,34 +1,48 @@
-import { useState } from "react";
+import React from "react";
 import "./test.css";
-import { CSSTransition } from "react-transition-group";
-import Test2 from "./test2";
+import socket from "./../socket";
 
 export default function Test() {
-    const [condition, setCondition] = useState(false);
+    const [start_game, set_start_game] = React.useState(false);
+    const [must_play, set_must_play] = React.useState(false);
+
+    React.useEffect(() => {
+        socket.emit("join_game", sessionStorage.getItem("TSC"));
+        socket.on("play", (cards) => {
+            set_must_play(true);
+            console.dir(cards);
+        });
+
+        socket.on("start_game_allowed", () => {set_start_game(true)});
+    }, []);
+
+    const ask_start_game = () => {socket.emit("ask_start_game")}
 
     return (
         <>
-            <CSSTransition
-                in={condition}
-                timeout={2000}
-                classNames="fade"
-                unmountOnExit
-                appear
-            >
-                <div style={{ width: "30%", height: "30%" }}><Test2 /></div>
-            </CSSTransition>
-            <CSSTransition
-                in={!condition}
-                timeout={2000}
-                classNames="fade"
-                unmountOnExit
-                appear
-            >
-                <div>
-                    <button onClick={() => setCondition(true)}>Activer la condition</button>
-                    <text>Hi :3</text> DIE.
-                </div>
-            </CSSTransition>
+            {!start_game? (
+                <>
+                    <button onClick={ask_start_game}>Start the test</button>
+                </>
+            ): (
+                <>
+                {must_play? (
+                    <>
+                        <button onClick={() => {
+                                socket.emit("play_answer", "draw");
+                                set_must_play(false);
+                            }}>Draw</button>
+                        <button onClick={() => {
+                                socket.emit("play_answer", "stay");
+                                set_must_play(false);
+                            }}>Stay</button>
+                    </>
+                ): (
+                    <>
+                    </>
+                )}
+                </>
+            )}
         </>
     );
 }

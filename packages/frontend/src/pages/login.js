@@ -11,15 +11,10 @@ export default function Log_in() {
     const [show_lobby, set_show_lobby] = useState(false);
 
     useEffect(() => {
-        if (sessionStorage.getItem("TSC")){
-            set_show_lobby(true);
-        }
-
-
         const log_in_response = (response) => {
             if (response) {
-                set_show_lobby(true);
                 sessionStorage.setItem("TSC", TSC);
+                set_show_lobby(true);
             }
             else setShow_warning(true);
         }
@@ -28,7 +23,13 @@ export default function Log_in() {
         return () => {
             socket.off("log_in_response", log_in_response);
         }
-    });
+    }, [TSC]);
+
+    useEffect(() => {
+        if (sessionStorage.getItem("TSC")){
+            set_show_lobby(true);
+        }
+    }, []);
 
     function clicked_confirm() {
         if ((!username && method === "sign_in") || !TSC) setShow_warning(true);

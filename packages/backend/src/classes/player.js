@@ -13,22 +13,15 @@ class player {
     }
 
     overkill_amount(){
-        // overkill_count = 0;
-        // this.cards.forEach((color) => {
-        //     let count = 0;
-        //     this.cards[color].forEach((card) => {
-        //         count += card.value;
-        //     });
-        //     if (count >= this.game.objective) overkill_count ++;
-        // });
-
-        return Object.values(this.cards).reduce((overkill_count, color_card) => {
-            const total = color_card.reduce((count, card) => count + card, 0)
-            if (total > this.game.objective) return overkill_count + 1;
-            else return overkill_count;
-        }
-        , 0);
-        // return overkill_count;
+        let overkill_count = 0;
+        Object.keys(this.cards).forEach((color) => {
+            let count = 0;
+            this.cards[color].forEach((card) => {
+                count += card.value;
+            });
+            if (count >= this.game.objective) overkill_count ++;
+        });
+        return overkill_count;
     }
 
     point_amount(){
@@ -37,7 +30,28 @@ class player {
         , 0);
     }
 
-    play(){}
+    async play(){
+        return new Promise((resolve, reject) => {
+            let has_played = false;
+            setTimeout(() => {
+                if (!has_played) reject("Timeout, play faster next time");
+            }, 30000);
+            setTimeout(() => {
+                if (!has_played) console.log("HURRY UP!!!!!");
+            }, 20000);
+            this.socket.emit("play", this.cards);
+            this.socket.on("play_answer", (choice) => {
+                has_played = true;
+                if (choice == "stay"){
+                    this.stay = true;
+                    resolve(true);
+                } else {
+                    this.game.give_card_to(this);
+                    resolve(true);
+                }
+            });
+        });
+    }
 }
 
-module.exports = player;
+export default player;
