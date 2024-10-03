@@ -30,25 +30,23 @@ class player {
         , 0);
     }
 
-    async play(){
+    async play() {
         return new Promise((resolve, reject) => {
-            let has_played = false;
-            setTimeout(() => {
-                if (!has_played) reject("Timeout, play faster next time");
-            }, 30000);
-            setTimeout(() => {
-                if (!has_played) console.log("HURRY UP!!!!!");
-            }, 20000);
+            const warningTimeout = setTimeout(() => console.log("HURRY UP!!!!!"), 20000);
+            const timeout = setTimeout(() => reject("Timeout, play faster next time"), 30000);
+
             this.socket.emit("play", this.cards);
             this.socket.on("play_answer", (choice) => {
-                has_played = true;
-                if (choice == "stay"){
+                clearTimeout(warningTimeout);
+                clearTimeout(timeout);
+    
+                if (choice === "stay") {
                     this.stay = true;
-                    resolve(true);
                 } else {
+                    this.stay = false;
                     this.game.give_card_to(this);
-                    resolve(true);
                 }
+                resolve(true);
             });
         });
     }
