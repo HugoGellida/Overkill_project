@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node .",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "fmt": "prettier -w **/*.js"
   },
   "dependencies": {
     "better-sqlite3": "^11.3.0",
@@ -13,7 +14,8 @@
     "socket.io": "^4.8.0"
   },
   "devDependencies": {
-    "nodemon": "3.1.7"
+    "nodemon": "3.1.7",
+    "prettier": "^3.3.3"
   },
   "type": "module"
 }
