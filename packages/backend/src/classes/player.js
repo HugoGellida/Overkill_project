@@ -1,6 +1,6 @@
 import { Socket } from "socket.io";
-import { Game } from "./game";
-import { Color, Card } from "./card";
+import { Game } from "./game.js";
+import { Color, Card } from "./card.js";
 
 /**
  *
@@ -20,7 +20,7 @@ class Player {
     this.score = game.score;
 
     /**
-     * @type {*} jsp
+     * @type {string}     //! TSC is a string. It stands for Torture Subject Code
      */
     this.TSC = TSC;
 
@@ -98,7 +98,7 @@ class Player {
           this.stay = true;
         } else {
           this.stay = false;
-          this.game.give_card_to(this);
+          this.game.giveCardTo(this);
         }
         resolve(true);
       });

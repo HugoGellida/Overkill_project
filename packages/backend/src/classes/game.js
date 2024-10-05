@@ -1,6 +1,6 @@
 import assert from "assert";
 import { Card, Color } from "./card.js";
-import Player from "./player.js";
+import {Player} from "./player.js";
 
 /**
  *
@@ -79,7 +79,10 @@ class Game {
    * @returns {Card[]}
    */
   generateCards() {
-    const cards = new Array(18).fill().map(a => new Card(a % 2 ? Color.BLACK : Color.RED, Math.floor(i / 2) + 1));
+    //TODO The array is full of undefined.
+    const cards = new Array(18).fill().map(a => {
+      new Card(a % 2 ? Color.BLACK : Color.RED, Math.floor(a / 2) + 1);
+    });
     return Game.shuffle(cards);
   }
 
@@ -166,7 +169,6 @@ class Game {
   }
 
   /**
-   *
    * @returns {boolean}
    */
   gameOver() {
@@ -174,7 +176,6 @@ class Game {
   }
 
   /**
-   *
    * @returns {boolean}
    */
   round_over() {
@@ -185,7 +186,6 @@ class Game {
   }
 
   /**
-   *
    * @returns {Player?}
    */
   roundWinner() {
