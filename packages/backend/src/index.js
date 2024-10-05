@@ -17,7 +17,7 @@ server.listen(3001, () => {
 
 const db = new Database("./database.db");
 db.pragma("journal_mode = WAL");
-db.prepare("CREATE TABLE IF NOT EXISTS User(username VARCHAR(20), TSC VARCHAR(20) NOT NULL)").run();
+db.prepare("CREATE TABLE IF NOT EXISTS User(username VARCHAR(20), TSC VARCHAR(20) NOT NULL, simulation_success INTEGER DEFAULT 0, simulation_failed INTEGER DEFAULT 0)").run();
 
 import { Game } from "./classes/game.js";
 

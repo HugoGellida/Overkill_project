@@ -42,7 +42,7 @@ class Game {
     this.bet = 1;
 
     /**
-     * @type {number}
+     * @type {Card[]}
      */
     this.draw = this.generateCards();
 
